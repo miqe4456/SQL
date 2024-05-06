@@ -26,15 +26,15 @@ VALUES
     (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
 
 
-*Display all values currently stored in superstore database.
+-- Display all values currently stored in superstore database.
 SELECT * FROM superstore;
 
-*What is a total quantity in stock for all Electronics?
+-- What is a total quantity in stock for all Electronics?
 SELECT SUM(stock_quantity)from superstore WHERE Category = "Electronics";
 
-*What is a total quantity in stock for Air Purifier's?
+-- What is a total quantity in stock for Air Purifier's?
 SELECT stock_quantity from superstore WHERE item_name = "Air Purifier";
 
-*What items currently have an average rating of 4.6 or over?
+-- What items currently have an average rating of 4.6 or over?
 SELECT average_rating, item_name from superstore WHERE average_rating >= 4.6;
 
