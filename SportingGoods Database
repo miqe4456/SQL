@@ -1,4 +1,4 @@
-*Create a Sporting Goods store database*
+-- Create a Sporting Goods store database*
 CREATE TABLE SportingGoods(id INTEGER PRIMARY KEY, item TEXT, price NUMERIC, color TEXT, type_sport TEXT);
 
 *Adding Values to the Database.*
@@ -18,10 +18,10 @@ INSERT INTO SportingGoods VALUES(13, "Cleats", 60.00, "Black and white", "Footba
 INSERT INTO SportingGoods VALUES(14, "Shoes", 75.00, "White", "Basketball");
 INSERT INTO SportingGoods VALUES(15, "Baseball bat", 35.00 , "Black", "Baseball");
 
-*Display the database ordered by price and just the items named as Jersey.*
+-- Display the database ordered by price and just the items named as Jersey.*
 SELECT * FROM SportingGoods 
 where item = "Jersey" order by price; 
 
-*What is the average price on all items for soccer?*
+-- What is the average price on all items for soccer?*
 SELECT AVG(PRICE) FROM SportingGoods 
 where type_sport = "Soccer";
