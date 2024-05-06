@@ -22,6 +22,6 @@ INSERT INTO SportingGoods VALUES(15, "Baseball bat", 35.00 , "Black", "Baseball"
 SELECT * FROM SportingGoods 
 where item = "Jersey" order by price; 
 
-*What is the average price on all items for soccer*
+*What is the average price on all items for soccer?*
 SELECT AVG(PRICE) FROM SportingGoods 
 where type_sport = "Soccer";
