@@ -30,11 +30,17 @@ VALUES
 SELECT * FROM superstore;
 
 -- What is a total quantity in stock for all Electronics?
-SELECT SUM(stock_quantity)from superstore WHERE Category = "Electronics";
+SELECT SUM(stock_quantity)
+FROM superstore 
+WHERE Category = "Electronics";
 
 -- What is a total quantity in stock for Air Purifier's?
-SELECT stock_quantity from superstore WHERE item_name = "Air Purifier";
+SELECT stock_quantity 
+FROM superstore 
+WHERE item_name = "Air Purifier";
 
 -- What items currently have an average rating of 4.6 or over?
-SELECT average_rating, item_name from superstore WHERE average_rating >= 4.6;
+SELECT average_rating, item_name 
+FROM superstore 
+WHERE average_rating >= 4.6;
 
