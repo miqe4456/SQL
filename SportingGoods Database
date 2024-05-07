@@ -19,9 +19,12 @@ INSERT INTO SportingGoods VALUES(14, "Shoes", 75.00, "White", "Basketball");
 INSERT INTO SportingGoods VALUES(15, "Baseball bat", 35.00 , "Black", "Baseball");
 
 -- Display the database ordered by price and just the items named as Jersey.*
-SELECT * FROM SportingGoods 
-where item = "Jersey" order by price; 
+SELECT * 
+FROM SportingGoods 
+WHERE item = "Jersey" 
+ORDER BY price; 
 
 -- What is the average price on all items for soccer?*
-SELECT AVG(PRICE) FROM SportingGoods 
-where type_sport = "Soccer";
+SELECT AVG(PRICE) 
+FROM SportingGoods 
+WHERE type_sport = "Soccer";
