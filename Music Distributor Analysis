@@ -1,0 +1,128 @@
+--List all invoices under Jane.
+
+SELECT emp.FirstName, emp.LastName,emp.employeeid, inv.invoicedate
+FROM chinook.employees emp
+INNER JOIN customers cust
+ON emp.EmployeeID = cust.SupportRepId
+INNER JOIN invoices inv
+ON inv.customerid = cust.customerid
+WHERE emp.FirstName = 'Jane';
+
+--How many songs in existance per artist
+SELECT COUNT(tra.TrackId) as Song , art.Name as Artist
+FROM tracks tra
+JOIN albums alb
+ON tra.albumid = alb.albumid
+JOIN artists art
+ON alb.Artistid = art.Artistid
+GROUP BY Artist;
+
+--List how many years have passed before an employee could do a sale.
+ 
+SELECT emp.FirstName, emp.LastName, MIN(inv.InvoiceDate)-emp.HireDate
+FROM employees emp
+INNER JOIN customers cust
+ON emp.EmployeeID = cust.SupportRepId
+INNER JOIN invoices inv
+ON inv.customerid = cust.customerid
+GROUP BY emp.FirstName, emp.LastName;
+
+--List artsits, song and time of the longest song in existance.
+SELECT art.Name as artist,tr.Name as song, MAX(milliseconds) as Time
+FROM tracks tr
+INNER JOIN albums alb
+ON tr.albumid = alb.albumid
+JOIN artists art
+ON alb.Artistid = art.Artistid;
+
+--List all users(Name,Customer ID, Country) which are not from USA.
+SELECT Firstname, LastName, customerID, country
+FROM customers
+WHERE COUNTRY <> 'USA';
+
+--Find invoices for clients in Canada, report should include customer name, invoice id, date of invoice and Billing Country.
+SELECT Firstname, lastname, invoiceID, invoicedate, BillingCountry
+FROM invoices inv
+JOIN customers cust
+ON inv.customerid = cust.customerid
+WHERE country = 'Canada';
+
+--List all Sales Support Agents.
+SELECT FirstName, Lastname, Title
+FROM Employees
+WHERE Title = 'Sales Support Agent';
+
+--List all billing countries in existance.
+SELECT  distinct billingcountry
+FROM chinook.invoices;
+
+--Find all invoices associated with each agent.
+SELECT emp.FirstName, emp.LastName,cust.customerid, inv.invoicedate
+FROM chinook.customers cust
+INNER JOIN invoices inv
+ON cust.customerid = inv.customerid
+INNER JOIN employees emp
+ON cust.SupportRepId = emp.EmployeeID;
+ 
+--List all Invoices Totals with customers and agents full names and country.
+SELECT cust.FirstName, cust.LastName,emp.FirstName as Employee_Name, emp.Lastname as Employee_LastName,cust.country,inv.Total as Invoice_Total
+FROM customers cust
+INNER JOIN invoices inv
+ON cust.customerid = inv.customerid
+INNER JOIN employees emp
+ON cust.SupportRepId = emp.EmployeeID;
+
+--List Total amount of invoices processed on 2009.
+SELECT COUNT(InvoiceID) as Toltas_invoice_qty
+FROM Invoices 
+WHERE InvoiceDate like '%2009%';
+
+--List Total Sales on 2010.
+SELECT SUM(Total)
+FROM Invoices 
+WHERE InvoiceDate like '%2010%';
+
+--Write a query that includes the purchased track name and artist name with each invoice line ID.
+SELECT tr.Name, art.name, inv.InvoiceID
+FROM Invoices inv
+JOIN Invoice_items invi
+ON inv.invoiceid = invi.invoiceid
+JOIN tracks tr
+ON invi.Trackid = tr.Trackid
+JOIN albums alb
+ON tr.Albumid = alb.Albumid
+JOIN artists art
+ON alb.Artistid = art.Artistid
+ORDER BY inv.InvoiceID asc;
+
+--Provide a search with all Tracks, Album name, Media type and Genre.
+SELECT tr.Name as Song, alb.Title as Album_Name, med.Name as Media_Type, gen.Name as Genre
+FROM tracks tr
+JOIN albums alb
+ON tr.Albumid = alb.Albumid
+JOIN media_types med
+ON tr.MediaTypeId = med.MediaTypeId
+JOIN genres gen
+ON tr.GenreId = gen.GenreId;
+
+--Show Total sales made by each agent.
+SELECT emp.FirstName, emp.LastName, SUM(inv.Total) as Total_sales
+FROM Invoices inv
+JOIN customers cust
+ON inv.Customerid = cust.CustomerID
+JOIN employees emp
+ON cust.SupportRepId = emp.EmployeeId
+GROUP BY emp.EmployeeId;
+
+-- Which Sales Agent made most dollar sales in 2009.
+WITH Max_Sale AS(
+SELECT SUM(inv.Total) as Total_sales
+FROM Invoices inv
+JOIN customers cust
+ON inv.Customerid = cust.CustomerID
+JOIN employees emp
+ON cust.SupportRepId = emp.EmployeeId
+GROUP BY emp.EmployeeId)
+
+SELECT MAX(Total_sales)
+FROM Max_Sale;
